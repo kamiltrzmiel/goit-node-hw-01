@@ -6,9 +6,15 @@ export const contactPath = path.resolve('db', 'contacts.json');
 
 //pobranie aktualnej listy kontaktów
 export const listContacts = async () => {
-  const response = await fs.readFile(contactPath);
-  return JSON.parse(response);
+  try {
+    const response = await fs.readFile(contactPath);
+    return JSON.parse(response);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
+
 
 //pobranie kontaktu z podanym contactId
 export const getContactById = async contactId => {
